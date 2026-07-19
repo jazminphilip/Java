@@ -1,1 +1,1 @@
-# Java class assignments repository
+# Java repository
