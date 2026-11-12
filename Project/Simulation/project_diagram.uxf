@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>27</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>_Interface: Particle_
+--
+position vector 
+velocity vector 
+acceleration vector 
+--
+getPosition(): vector
+getVelocity(): vector
+getAcceleration(): vector
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>432</y>
+      <w>288</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>_Class: Engine_
+--
+getNumberParticles(): int
+getFPS(): int
+pause(): void
+continue(): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>477</x>
+      <y>576</y>
+      <w>288</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>_Class: Viewer_
+--
+main(): void
+updateFrame(): void
+viewVectors(): void
+viewTrails(): void
+ </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>621</x>
+      <y>135</y>
+      <w>90</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS MANY</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>333</y>
+      <w>225</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>_Class: ParticleListener_
+--
+actionPerformed(): void
+changePositionButton(): void
+changeVelocityButton(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>72</x>
+      <y>432</y>
+      <w>153</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>_Interface: ActionListener_
+-
+actionPerformed(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>351</x>
+      <y>72</y>
+      <w>126</w>
+      <h>279</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>10.0;290.0;10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>513</y>
+      <w>63</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>504</y>
+      <w>225</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>_Class: CollisionListener_
+--
+actionPerformed(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>90</y>
+      <w>90</w>
+      <h>468</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>10.0;500.0;40.0;500.0;40.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>639</x>
+      <y>54</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>711</x>
+      <y>18</y>
+      <w>279</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>_Class: ResultantForceCalculator_
+--
+changePosition(vector): vector
+changeVelocity(vector): vector
+changeAcceleration(vector): vector
+calculateResultantForce(many vectors): vector</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>621</y>
+      <w>99</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>324</y>
+      <w>225</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_Class: ReloadEngine_
+--
+saveFrame(): void
+loadFrame(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>378</y>
+      <w>63</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+HAS A</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>594</y>
+      <w>225</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>_Class: DrawListener_
+--
+drawObject(): void
+setPosition(): void
+setVelocity(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>90</x>
+      <y>468</y>
+      <w>108</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;100.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>144</x>
+      <y>360</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>144</x>
+      <y>468</y>
+      <w>54</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;40.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>189</y>
+      <w>144</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>_Class: Circle_
+--
+radius: double
+--
+getRadius(): double</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>495</x>
+      <y>135</y>
+      <w>27</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
