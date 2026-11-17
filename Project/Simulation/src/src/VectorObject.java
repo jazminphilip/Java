@@ -84,4 +84,9 @@ public class VectorObject
 		this.y = y;
 	}
 	
+	public void set(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 }

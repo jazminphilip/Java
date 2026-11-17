@@ -29,10 +29,13 @@ public class Particle
 	private VectorObject position;
 	private VectorObject velocity;
 	private VectorObject acceleration;
+	
 	private double mass = 10;
 	private int radius = 10;
+	private Viewer viewer;
 	
-	public Particle() {
+	public Particle(Viewer viewer) {
+		this.viewer = viewer;
 		this.position = new VectorObject();
 		this.velocity = new VectorObject();
 		this.acceleration = new VectorObject();
@@ -40,18 +43,15 @@ public class Particle
 	
 	//SET METHODS
 	public void setPosition(double x, double y) {
-		position.setx(x);
-		position.sety(y);
+		position.set(x,y);
 	}
 	
 	public void setVelocity(double x, double y) {
-		velocity.setx(x);
-		velocity.sety(y);
+		velocity.set(x,y);
 	}
 	
 	public void setAcceleration(double x, double y) {
-		acceleration.setx(x);
-		acceleration.sety(y);
+		acceleration.set(x,y);
 	}
 	
 	public void setRadius(int radius) {
@@ -83,17 +83,20 @@ public class Particle
 		return mass;
 	}
 	
-	//ADD METHODS
-	public void addToPosition(VectorObject target) {
-		position = VectorObject.add(position, target); 
+	//UPDATE STATES
+	public void updateState() {
+		//UPDATE ACCELERATION LATER
+		
+		//WALL COLLISION UPDATE
+		if(this.getPosition().getx() > viewer.getWidth() - 4 * this.getRadius() || this.getPosition().getx() < 0) {
+			this.setVelocity(this.getVelocity().getx() * - 1, this.getVelocity().gety());
+		}
+			
+		if(this.getPosition().gety() > viewer.getHeight() - 6 * this.getRadius() || this.getPosition().gety() < 0) {
+			this.setVelocity(this.getVelocity().getx(), this.getVelocity().gety() * -1);
+		}
+		
+		velocity = VectorObject.add(velocity, acceleration);
+		position = VectorObject.add(position, velocity);
 	}
-	
-	public void addToVelocity(VectorObject target) {
-		velocity = VectorObject.add(velocity, target); 
-	}
-	
-	public void addToAcceleration(VectorObject target) {
-		acceleration = VectorObject.add(acceleration, target); 
-	}
-	
 }

@@ -19,6 +19,7 @@
 */
 package src;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.*;
@@ -31,12 +32,10 @@ import javax.swing.*;
  */
 public class Panel extends JPanel //paintComponent was used
 {
-	Model model;
-	LinkedList<Particle> list;
+	ArrayList<Particle> list;
 	
-	public Panel(Model model) {
-		this.model = model;
-		this.list = model.getList();
+	public Panel(ArrayList<Particle> list) {
+		this.list = list;
 	}
 	
 	public void paintComponent(Graphics g) {

@@ -22,6 +22,7 @@ package src;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.*;
@@ -35,86 +36,30 @@ import java.util.Random;
  * Viewer is-a ...
  * Viewer is ...
  */
-public class Viewer extends JFrame implements ActionListener
+public class Viewer extends JFrame
 {
-	Viewer box;
-	Model model;
-	Timer timer;
-	LinkedList<Particle> list;
+	ArrayList<Particle> list;
 	
-	public Viewer(Model model) {
-		this.box = this;
-		this.model = model;
-		this.list = model.getList();
-		
+	public Viewer(ArrayList<Particle> list) {
+		this.list = list;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("box");
 		Dimension minSize = new Dimension(500,300);					
 		setMinimumSize(minSize);
 		
-		box.setContentPane(new Panel(model));
-		box.setVisible(true);
-		
-		timer = new Timer(15, this); //i should move this to the model class
-		timer.start();
+		this.setContentPane(new Panel(list));
+		this.setVisible(true);
+
 	}
 	
+	public void setList(ArrayList<Particle> list) {
+		this.list = list;
+	}
 	
 	public static void main(String[] args)
 	{
-		new Viewer(new Model());
+		new Model();
 	}
 
 
-	public void collision(LinkedList<Particle> list) {
-		for(int i = 0; i < list.size(); i++) {
-			Particle target = list.get(i);
-			// just for me to know what is happening
-			// System.out.println(target.getPosition().getx() + " " + target.getPosition().gety() + " " + this.getWidth() + " " + this.getHeight());
-			
-			if(target.getPosition().getx() > this.getWidth() - 4 * target.getRadius() || target.getPosition().getx() < 0) {
-				target.setVelocity(target.getVelocity().getx() * -1, target.getVelocity().gety());
-			}
-			
-			if(target.getPosition().gety() > this.getHeight() - 6 * target.getRadius() || target.getPosition().gety() < 0) {
-				target.setVelocity(target.getVelocity().getx(), target.getVelocity().gety() * -1);
-			}
-			
-			target.addToPosition(target.getVelocity());
-			target.addToVelocity(target.getAcceleration());
-			}
-	}
-	
-	public void accelerate(LinkedList<Particle> list) {
-		for(int i = 0; i < list.size(); i++) {
-			Particle target = list.get(i);
-			VectorObject acceleration = new VectorObject(0,0);
-			
-			for(int j = 0; j < list.size(); j++) {
-				if(list.get(i) != list.get(j)) {
-					//final - initial state calculates a vector TOWARDS the other object
-					VectorObject distance = list.get(j).getPosition();
-					
-					double force = target.getMass() * list.get(j).getMass();
-					
-					
-						target.addToVelocity(null);
-					}
-				
-					else {
-					
-					}	
-			}
-		}
-	}
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		// For every particle, can collide with edges of box
-		collision(list);
-		
-		// For every particle, find acceleration
-		
-		box.repaint(); //repaint each time
-	}
 }

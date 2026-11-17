@@ -18,8 +18,13 @@
 * Version: 2026-11-11
 */
 package src;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
+
+import javax.swing.Timer;
 
 /**
  * Purpose: The reponsibility of Model is ...
@@ -27,20 +32,21 @@ import java.util.Random;
  * Model is-a ...
  * Model is ...
  */
-public class Model
+public class Model implements ActionListener //TIMER LISTENER
 {
-	LinkedList<Particle> list = new LinkedList<>(); //to number and write to file later
+	Timer timer;
+	ArrayList<Particle> list = new ArrayList<>(); //to number and write to file later
+	
+	Viewer viewer;
 	
 	public Model() {
-		Random seed = new Random();
-		for(int i = 0; i < 2; i++) {
-			Particle test = new Particle();
-			double x = seed.nextDouble(10);
-			double y = seed.nextDouble(10);
-			test.setPosition(x, y);
-			test.setVelocity(x, y);
-			this.addParticle(test);
-		}
+		this.viewer = new Viewer(list);
+		viewer.setList(list);
+		timer = new Timer(15, this); //i should move this to the model class
+		timer.start();
+		
+		TestScenarios.Random(this, viewer, 200);
+		TestScenarios.Line(this, viewer, 200);
 		
 		//OHHHH MY GOD IT WORKS!!!!!
 	}
@@ -49,8 +55,29 @@ public class Model
 		list.add(particle);
 	}
 	
-	public LinkedList<Particle> getList() {
+	public ArrayList<Particle> getList() {
 		return list;
+	}
+
+	public void update(ArrayList<Particle> list) {
+		for(Particle p : list) {
+			p.updateState();
+		}
+		
+		//USE A NESTED ENHANCED FOR LOOP TO CHECK IF THERE IS A COLLISION??????? 
+		//theres a ray that hits each circles center with one another and then check the singular point for radius to see if that x position is the same
+		//then change position by velocity and all :))
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		// For every particle, can collide with edges of box
+		update(list);
+		
+		// For every particle, find acceleration
+		
+		viewer.repaint(); 
 	}
 	
 }
