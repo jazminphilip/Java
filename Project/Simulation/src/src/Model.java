@@ -33,20 +33,15 @@ public class Model
 	
 	public Model() {
 		Random seed = new Random();
-		for(int i = 0; i < 1; i++) {
+		for(int i = 0; i < 2; i++) {
 			Particle test = new Particle();
 			double x = seed.nextDouble(10);
 			double y = seed.nextDouble(10);
-			int r = seed.nextInt(20);
 			test.setPosition(x, y);
 			test.setVelocity(x, y);
-			test.setRadius(r);
 			this.addParticle(test);
 		}
-		Particle test2 = new Particle();
-		test2.setVelocity(2, 3);
 		
-		this.addParticle(test2);
 		//OHHHH MY GOD IT WORKS!!!!!
 	}
 	

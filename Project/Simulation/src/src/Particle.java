@@ -29,6 +29,7 @@ public class Particle
 	private VectorObject position;
 	private VectorObject velocity;
 	private VectorObject acceleration;
+	private double mass = 10;
 	private int radius = 10;
 	
 	public Particle() {
@@ -57,6 +58,10 @@ public class Particle
 		this.radius = radius;
 	}
 	
+	public void setMass(double mass) {
+		this.mass = mass;
+	}
+	
 	//GETTER METHODS
 	public VectorObject getPosition() {
 		return position;
@@ -74,17 +79,21 @@ public class Particle
 		return radius;
 	}
 	
+	public double getMass() {
+		return mass;
+	}
+	
 	//ADD METHODS
 	public void addToPosition(VectorObject target) {
-		position.add(target);
+		position = VectorObject.add(position, target); 
 	}
 	
 	public void addToVelocity(VectorObject target) {
-		velocity.add(target);
+		velocity = VectorObject.add(velocity, target); 
 	}
 	
 	public void addToAcceleration(VectorObject target) {
-		acceleration.add(target);
+		acceleration = VectorObject.add(acceleration, target); 
 	}
 	
 }

@@ -55,7 +55,7 @@ public class Viewer extends JFrame implements ActionListener
 		box.setContentPane(new Panel(model));
 		box.setVisible(true);
 		
-		timer = new Timer(15, this);
+		timer = new Timer(15, this); //i should move this to the model class
 		timer.start();
 	}
 	
@@ -66,14 +66,11 @@ public class Viewer extends JFrame implements ActionListener
 	}
 
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		//For every particle, add to velocity
+	public void collision(LinkedList<Particle> list) {
 		for(int i = 0; i < list.size(); i++) {
 			Particle target = list.get(i);
-			//just for me to know what is happening
-			System.out.println(target.getPosition().getx() + " " + target.getPosition().gety() + " " + this.getWidth() + " " + this.getHeight());
+			// just for me to know what is happening
+			// System.out.println(target.getPosition().getx() + " " + target.getPosition().gety() + " " + this.getWidth() + " " + this.getHeight());
 			
 			if(target.getPosition().getx() > this.getWidth() - 4 * target.getRadius() || target.getPosition().getx() < 0) {
 				target.setVelocity(target.getVelocity().getx() * -1, target.getVelocity().gety());
@@ -85,12 +82,39 @@ public class Viewer extends JFrame implements ActionListener
 			
 			target.addToPosition(target.getVelocity());
 			target.addToVelocity(target.getAcceleration());
+			}
+	}
+	
+	public void accelerate(LinkedList<Particle> list) {
+		for(int i = 0; i < list.size(); i++) {
+			Particle target = list.get(i);
+			VectorObject acceleration = new VectorObject(0,0);
 			
-			Random seed = new Random();
-			double x = seed.nextDouble(1) - 1;
-			double y = seed.nextDouble(1) - 1;
-			target.setAcceleration(x,y);
+			for(int j = 0; j < list.size(); j++) {
+				if(list.get(i) != list.get(j)) {
+					//final - initial state calculates a vector TOWARDS the other object
+					VectorObject distance = list.get(j).getPosition();
+					
+					double force = target.getMass() * list.get(j).getMass();
+					
+					
+						target.addToVelocity(null);
+					}
+				
+					else {
+					
+					}	
+			}
 		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		// For every particle, can collide with edges of box
+		collision(list);
+		
+		// For every particle, find acceleration
+		
 		box.repaint(); //repaint each time
 	}
 }
