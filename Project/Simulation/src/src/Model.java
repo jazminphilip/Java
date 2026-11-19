@@ -45,8 +45,7 @@ public class Model implements ActionListener //TIMER LISTENER
 		timer = new Timer(15, this); //i should move this to the model class
 		timer.start();
 		
-		TestScenarios.Random(this, viewer, 200);
-		TestScenarios.Line(this, viewer, 200);
+		TestScenarios.Random(this, viewer, 1000);
 		
 		//OHHHH MY GOD IT WORKS!!!!!
 	}
@@ -58,8 +57,21 @@ public class Model implements ActionListener //TIMER LISTENER
 	public ArrayList<Particle> getList() {
 		return list;
 	}
+	
 
 	public void update(ArrayList<Particle> list) {
+		for(Particle p1 : list) {
+			for(Particle p2 : list) {
+				if(p1 != p2) {
+					
+					VectorObject force = Particle.getForce(p1,p2); //WHY IS THIS A PROBLEM!??!?!?!
+					p1.setAcceleration(force);
+					
+				}
+			}
+			System.out.println(p1);
+		}
+		
 		for(Particle p : list) {
 			p.updateState();
 		}
@@ -74,8 +86,6 @@ public class Model implements ActionListener //TIMER LISTENER
 	{
 		// For every particle, can collide with edges of box
 		update(list);
-		
-		// For every particle, find acceleration
 		
 		viewer.repaint(); 
 	}

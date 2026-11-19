@@ -40,6 +40,11 @@ public class VectorObject
 		
 	}
 	
+	public VectorObject(VectorObject target) {
+		this.x = target.x;
+		this.y = target.y;
+	}
+	
 	//static methods are so great thank you so much
 	public static VectorObject add(VectorObject vector1, VectorObject vector2) {
 		VectorObject output = new VectorObject();
@@ -55,13 +60,6 @@ public class VectorObject
 		return output;
 	}
 	
-	public static VectorObject scale(VectorObject x, double y) {
-		x.setx(x.getx() * y);
-		x.setx(x.gety() * y);
-		return x;
-	}
-	
-	
 	//GETTERS
 	public double getx() {
 		return x;
@@ -71,8 +69,16 @@ public class VectorObject
 		return y;
 	}
 	
-	public double getMagnitde() {
+	public double getMagnitude() {
 		return Math.sqrt((x * x + y * y));
+	}
+	
+	public VectorObject getUnit() {
+		VectorObject output = new VectorObject(this); //make sure its a copy
+		double x = output.getx() / output.getMagnitude();
+		double y = output.gety() / output.getMagnitude();
+		output.set(x,y);
+		return output;
 	}
 	
 	//SETTERS
@@ -89,4 +95,20 @@ public class VectorObject
 		this.y = y;
 	}
 	
+	public VectorObject scale(double constant) {
+		this.setx(this.getx() * constant);
+		this.setx(this.gety() * constant);
+		return this;
+	}
+	
+	public void add(VectorObject p) {
+		this.x += p.getx();
+		this.y += p.gety();
+	}
+	
+	@Override
+	public String toString() {
+		return "<" + this.x + ", " + this.y + ">";
+	}
+		
 }

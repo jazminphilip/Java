@@ -50,11 +50,23 @@ public class TestScenarios
 		Random seed = new Random();
 		for(int i = 0; i < n; i++) {
 			Particle test = new Particle(viewer);
+			
 			double x = seed.nextDouble(10);
 			double y = seed.nextDouble(10);
-			test.setPosition(x, y);
 			test.setVelocity(x, y);
+			
+			x = seed.nextDouble(50) - 25;
+			y = seed.nextDouble(50) - 25;
+			
+			test.setPosition(viewer.getWidth() / 2 + x, viewer.getHeight() / 2 + y);
 			model.addParticle(test);
 		}
 	}
-}
+	
+	public static void center(Model model, Viewer viewer) {
+		Particle test = new Particle(viewer);
+		test.setPosition(viewer.getWidth()/2, viewer.getHeight()/2);
+		test.setUpdateable(false);
+		model.addParticle(test);
+		}
+	}

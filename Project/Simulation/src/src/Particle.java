@@ -29,6 +29,9 @@ public class Particle
 	private VectorObject position;
 	private VectorObject velocity;
 	private VectorObject acceleration;
+	private boolean updateable = true;
+	
+	static final double gravitationalConstant = 1;
 	
 	private double mass = 10;
 	private int radius = 10;
@@ -46,12 +49,24 @@ public class Particle
 		position.set(x,y);
 	}
 	
+	public void setPosition(VectorObject v) {
+		position.set(v.getx(),v.gety());
+	}
+	
 	public void setVelocity(double x, double y) {
 		velocity.set(x,y);
 	}
 	
+	public void setVelocity(VectorObject v) {
+		velocity.set(v.getx(),v.gety());
+	}
+	
 	public void setAcceleration(double x, double y) {
 		acceleration.set(x,y);
+	}
+	
+	public void setAcceleration(VectorObject v) {
+		acceleration.set(v.getx(),v.gety());
 	}
 	
 	public void setRadius(int radius) {
@@ -62,6 +77,9 @@ public class Particle
 		this.mass = mass;
 	}
 	
+	public void setUpdateable(boolean i) {
+		this.updateable = i;
+	}
 	//GETTER METHODS
 	public VectorObject getPosition() {
 		return position;
@@ -83,20 +101,70 @@ public class Particle
 		return mass;
 	}
 	
+	public static VectorObject getForce(Particle p1, Particle p2) {
+		
+		VectorObject direction = new VectorObject(Particle.getDistanceVector(p1, p2));
+		
+		double r = direction.getMagnitude();
+		
+		direction = direction.getUnit();
+		
+		double magnitude = p1.getMass() * p2.getMass() * gravitationalConstant / (r * r);
+		
+		return direction.getUnit().scale(magnitude);
+	}
+	
+	public static double getForceMagnitude(Particle p1, Particle p2) {
+		double output  = p1.getMass() * p2.getMass();
+		output *= gravitationalConstant;
+		output /= (getDistanceVector(p1,p2).getMagnitude());
+		return output;
+	}
+	
+	//
+	public static VectorObject getDistanceVector(Particle p1, Particle p2) {
+		VectorObject v1 = new VectorObject(p1.getPosition());
+		VectorObject v2 = new VectorObject(p2.getPosition()); 
+		
+		v1.scale(-1);
+		
+		VectorObject output = VectorObject.add(v1, v2);
+		
+		return output;
+	}
+	
 	//UPDATE STATES
 	public void updateState() {
 		//UPDATE ACCELERATION LATER
-		
 		//WALL COLLISION UPDATE
-		if(this.getPosition().getx() > viewer.getWidth() - 4 * this.getRadius() || this.getPosition().getx() < 0) {
+		
+		//RIGHT SIDE then LEFT SIDE
+		//if the particle is moving rightwards, then it goes left when collides (positive x to negative x velocity)
+		if(this.getPosition().getx() > viewer.getWidth() - 4 * this.getRadius() && this.getVelocity().getx() > 0 || 
+				this.getPosition().getx() < 0 && this.getVelocity().getx() < 0) {
 			this.setVelocity(this.getVelocity().getx() * - 1, this.getVelocity().gety());
 		}
+		
+		
 			
-		if(this.getPosition().gety() > viewer.getHeight() - 6 * this.getRadius() || this.getPosition().gety() < 0) {
+		//BOTTOM then TOP
+		if(this.getPosition().gety() > viewer.getHeight() - 6 * this.getRadius() && this.getVelocity().gety() > 0 || 
+				this.getPosition().gety() < 0 && this.getVelocity().gety() < 0) {
 			this.setVelocity(this.getVelocity().getx(), this.getVelocity().gety() * -1);
 		}
 		
-		velocity = VectorObject.add(velocity, acceleration);
-		position = VectorObject.add(position, velocity);
+		if(this.updateable == true) {
+			velocity.add(acceleration);
+			position.add(velocity);	
+		}
+	}
+	
+	@Override
+	public String toString() {
+		String output = "Position : " + position.toString();
+		   output += "\nVelocity: " + velocity.toString();
+		   output += "\nAcceleration: " + acceleration.toString();
+		
+		return output;
 	}
 }
