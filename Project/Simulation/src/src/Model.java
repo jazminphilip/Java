@@ -45,7 +45,7 @@ public class Model implements ActionListener //TIMER LISTENER
 		timer = new Timer(15, this); //i should move this to the model class
 		timer.start();
 		
-		TestScenarios.Random(this, viewer, 1000);
+		TestScenarios.Random(this, viewer, 2);
 		
 		//OHHHH MY GOD IT WORKS!!!!!
 	}

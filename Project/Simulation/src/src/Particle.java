@@ -31,7 +31,7 @@ public class Particle
 	private VectorObject acceleration;
 	private boolean updateable = true;
 	
-	static final double gravitationalConstant = 1;
+	static final double gravitationalConstant = 1000;
 	
 	private double mass = 10;
 	private int radius = 10;
